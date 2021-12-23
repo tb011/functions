@@ -1,0 +1,116 @@
+---
+title: "Creating and Applying Functions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This document will help you to;
+
+1. Create functions
+2. Run your functions over, rows and/or columns, dataframes, lists etc. 
+
+### 1. Defining a function
+
+Give a working example of a function 
+
+Let's say that we're working with a a dataframe, that consists of survey data
+for a given population. 
+
+Let's use the sampleSurvey data within the biomarkerstats package
+
+```{r installation}
+# install.packages("devtools")
+# devtools::install_github("micronutrientsupport/biomarkerstats")
+```
+
+```{r sampleSurvey}
+data <- biomarkerstats::sampleSurvey
+head(data)
+```
+
+#### Create a function that applies to one row of the dataframe 
+
+Let's say we'd like to create a function that does .... deficiency, simple? ...
+for each individual.
+
+Since we're going to be using the apply functions (base r, give link), we are 
+going to right a function that can be 'applied' to each row (individual).
+
+```{r function definition}
+# insert function here...
+```
+
+Let's test it on one row of data (one individual in our survey dataset)
+
+```{r row-test}
+
+# Select one row of data
+oneRow <- biomarkerstats::sampleSurvey[1, ]
+
+
+# func <- function (x){
+# perform operation
+# perform operation
+# perform operation
+#return (x)
+#}
+
+# Invoke the function 
+# func(oneRow)
+```
+
+## Apply the function over our dataset
+
+Now let's 'apply' our function over our entire survey data 
+
+Here's another example of a commonly used function in base r; mean ()
+
+apply (x, 1, function) = applies function to rows  
+apply (x, 2, function) = apply function to columns
+
+Simply put: 
+
+1 = apply to rows, 
+2 = apply to columns 
+
+
+apply(data["zinc"], 1, mean) = apply mean function to rows,  
+!(edited for zinc, column only)
+
+and collapse the other dimension (will get x numbers, as there's x rows) 
+
+apply (data, 2, mean) = apply mean function to columns, and collapse the other
+dimension (will get x numbers, as there's x columns) 
+
+
+```{r apply-function}
+# apply (data, 1, mean) 
+
+```
+
+### 3. What if my dataset is not a list 
+Give examples of mapply, apply, also how to use split! (aggregate by different regions
+and then )
+
+```{r other apply functions}
+# We are going to aggregate by region name
+# Creates a list of data seperated by region name
+region <- split(data, data$regionName)
+
+# lapply output as a list (remove NAs)
+lapply(region, function(x) colMeans(x[,c("ageInMonths","zinc")], na.rm=T))
+
+# sapply output as a dataframe (remove NAs)
+sapply(region, function(x) colMeans(x[,c("ageInMonths","zinc")], na.rm=T))
+
+```
+
+### 4. Apply the function over multiple datasets 
+
+Embed 'v2_test_incl_urbanity' source code here. 
+
