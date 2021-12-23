@@ -1,1 +1,1 @@
-# functions
+# Creating and applying functions
