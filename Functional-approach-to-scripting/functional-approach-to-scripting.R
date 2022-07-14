@@ -1,5 +1,5 @@
 # Functional approach to scripting
-# R Club
+# Tineka Blake
 # 15th July 2022 
 
 # 1. Setwd to this source file location
